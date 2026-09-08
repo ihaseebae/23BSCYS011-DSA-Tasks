@@ -1,0 +1,77 @@
+First Steps with NumPy bold text
+
+MUHAMMAD HASEEB 23BSCYS011 - 8TH SEPTEMBER, 2026
+
+Task 1
+
+
+import numpy as one
+
+arr = oneone.array([10, 20, 30, 40, 50])
+
+print("Shape:", arr.shape)
+print("Data type:", arr.dtype)
+
+output:
+Shape: (5,)
+Data type: int64
+
+
+task 2:
+import numpy as oneone
+
+data = oneone.array([1, 2, 3, 4, 5])
+result = data * 10
+print(result)
+
+output:
+[10 20 30 40 50]
+
+task 3:
+
+import numpy as oneone
+
+arr = oneone.random.randint(1, 101, size=6)
+print("Original array:", arr)
+
+mask = arr > 50
+print("Boolean mask:", mask)
+
+filtered = arr[mask]
+print("Filtered array:", filtered)
+
+output:
+Original array: [36 85 23 33 45 45]
+Boolean mask: [False  True False False False False]
+Filtered array: [85]
+
+task 4:
+import numpy as oneone
+
+vals = oneone.array([15, 8, 22, 4, 31])
+
+vals[vals < 10] = 0
+
+print(vals)
+
+output:
+[15  0 22  0 31]
+
+
+task 5:
+import numpy as oneone
+
+arr = oneone.array([[1, 2, 3, 4],
+                 [5, 6, 7, 8],
+                 [9, 10, 11, 12]])
+
+print("Array:\n", arr)
+print("Shape:", arr.shape)
+
+output:
+Array:
+ [[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+Shape: (3, 4)
+
