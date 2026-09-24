@@ -1,0 +1,155 @@
+NumPy Broadcasting & Vectorization — Solutions
+================================================
+
+Q1 - Scalar Broadcasting Operation
+------------------------------------
+Code:
+
+import numpy as np
+
+arr = np.array([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]])
+
+result = arr + 10
+
+print(result)
+
+Output:
+[[11 12 13]
+ [14 15 16]
+ [17 18 19]]
+
+
+Q2 - Row Vector Broadcasting
+------------------------------------
+Code:
+
+import numpy as np
+
+arr_2d = np.array([[10, 20, 30],
+                    [40, 50, 60],
+                    [70, 80, 90],
+                    [100, 110, 120]])
+
+arr_1d = np.array([1, 2, 3])
+
+result = arr_2d - arr_1d
+
+print(result)
+
+Output:
+[[  9  18  27]
+ [ 39  48  57]
+ [ 69  78  87]
+ [ 99 108 117]]
+
+Explanation:
+This operation is compatible because NumPy compares shapes from the trailing
+dimension backward - the (3,) array's only dimension (3) matches the 2D
+array's last dimension (3), so the 1D array is broadcast (repeated) across
+all 4 rows.
+
+
+Q3 - Column Vector Broadcasting via Reshape
+------------------------------------
+Code (the error):
+
+import numpy as np
+
+arr_2d = np.array([[1, 2, 3, 4],
+                    [5, 6, 7, 8],
+                    [9, 10, 11, 12]])
+
+arr_1d = np.array([10, 20, 30])
+
+try:
+    result = arr_2d + arr_1d
+except ValueError as e:
+    print('Error:', e)
+
+Output:
+Error: operands could not be broadcast together with shapes (3,4) (3,)
+
+Code (the fix):
+
+arr_1d_col = arr_1d.reshape(-1, 1)
+
+result = arr_2d + arr_1d_col
+
+print(result)
+
+Output:
+[[11 12 13 14]
+ [25 26 27 28]
+ [39 40 41 42]]
+
+
+Q4 - Data Centering without Loops
+------------------------------------
+Code:
+
+import numpy as np
+
+np.random.seed(42)
+data = np.random.randint(1, 50, size=(10, 3))
+
+column_means = data.mean(axis=0)
+
+centered_data = data - column_means
+
+print(centered_data)
+
+Original data:
+[[39 29 15]
+ [43  8 21]
+ [39 19 23]
+ [11 11 24]
+ [36 40 24]
+ [ 3 22  2]
+ [24 44 30]
+ [38  2 21]
+ [33 12 22]
+ [44 25 49]]
+
+Column means: [31.  21.2 23.1]
+
+Centered data:
+[[  8.    7.8  -8.1]
+ [ 12.  -13.2  -2.1]
+ [  8.   -2.2  -0.1]
+ [-20.  -10.2   0.9]
+ [  5.   18.8   0.9]
+ [-28.    0.8 -21.1]
+ [ -7.   22.8   6.9]
+ [  7.  -19.2  -2.1]
+ [  2.   -9.2  -1.1]
+ [ 13.    3.8  25.9]]
+
+
+Q5 - Full Feature Standardisation
+------------------------------------
+Code (single vectorised expression):
+
+import numpy as np
+
+np.random.seed(1)
+data = np.random.randint(1, 100, size=(5, 2)).astype(float)
+
+standardised = (data - data.mean(axis=0)) / data.std(axis=0)
+
+print(standardised)
+
+Original data:
+[[38. 13.]
+ [73. 10.]
+ [76.  6.]
+ [80. 65.]
+ [17.  2.]]
+
+Standardised data:
+[[-0.75419944 -0.26726124]
+ [ 0.64989526 -0.3965812 ]
+ [ 0.77024623 -0.56900781]
+ [ 0.9307142   1.97428466]
+ [-1.59665625 -0.74143441]]
