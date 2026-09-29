@@ -1,0 +1,126 @@
+NumPy Indexing, Reshaping & Stacking — Solutions
+==================================================
+
+Task 1 - Fancy Indexing for Reordering
+------------------------------------
+Code:
+
+import numpy as np
+
+arr = np.array([10, 20, 30, 40, 50])
+
+reordered = arr[[4, 0, 4]]
+
+print('Original array:', arr)
+print('Reordered array:', reordered)
+
+Output:
+Original array: [10 20 30 40 50]
+Reordered array: [50 10 50]
+
+
+Task 2 - Complex Boolean Masking
+------------------------------------
+Code:
+
+import numpy as np
+
+data = np.array([15, 25, 35, 45, 55])
+
+filtered = data[(data > 40) | (data < 20)]
+
+print('Filtered array:', filtered)
+
+Output:
+Filtered array: [15 45 55]
+
+
+Task 3 - Inferred Axis Reshaping
+------------------------------------
+Code:
+
+import numpy as np
+
+arr = np.arange(1, 13)
+
+reshaped = arr.reshape(3, -1)
+
+print('Original array:', arr)
+print(reshaped)
+print('Shape:', reshaped.shape)
+
+Output:
+Original array: [ 1  2  3  4  5  6  7  8  9 10 11 12]
+
+Reshaped array:
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+
+Shape: (3, 4)
+
+
+Task 4 - Array Stacking Operations
+------------------------------------
+Code:
+
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+vstacked = np.vstack((a, b))
+hstacked = np.hstack((a, b))
+
+print('vstack result:')
+print(vstacked)
+print('shape:', vstacked.shape)
+
+print('hstack result:')
+print(hstacked)
+print('shape:', hstacked.shape)
+
+Output:
+vstack result:
+[[1 2 3]
+ [4 5 6]]
+shape: (2, 3)
+
+hstack result:
+[1 2 3 4 5 6]
+shape: (6,)
+
+
+Task 5 - Data Plumbing Pipeline
+------------------------------------
+Code:
+
+import numpy as np
+
+# Step 1: reshape 1D array into (2, 3)
+arr_1d = np.array([1, 2, 3, 4, 5, 6])
+arr_2d = arr_1d.reshape(2, 3)
+print(arr_2d)
+
+# Step 2: concatenate with another (2, 3) array along axis 0
+arr_2d_other = np.array([[7, 8, 9], [10, 11, 12]])
+concatenated = np.concatenate((arr_2d, arr_2d_other), axis=0)
+print(concatenated)
+
+# Step 3: collapse back into 1D
+final_1d = concatenated.ravel()
+print(final_1d)
+
+Output:
+Reshaped array (2, 3):
+[[1 2 3]
+ [4 5 6]]
+
+Concatenated array (axis=0), shape (4, 3):
+[[ 1  2  3]
+ [ 4  5  6]
+ [ 7  8  9]
+ [10 11 12]]
+
+Final 1D array after ravel():
+[ 1  2  3  4  5  6  7  8  9 10 11 12]
